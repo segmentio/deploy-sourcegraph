@@ -33,7 +33,7 @@ spec:
               fieldPath: metadata.name
         - name: CACHE_DIR
           value: /mnt/cache/$(POD_NAME)
-        image: sourcegraph/searcher:3.2.0@sha256:703014a281434a91674c2f2623675cba0b0b529bc49c0f243a1b55b7d9b4cd57
+        image: sourcegraph/searcher:3.2.2@sha256:f3d510d4fcf9c61567bd2f5f6b5e22a543424001bee13560dddc39f31102ff64
         terminationMessagePolicy: FallbackToLogsOnError
         name: searcher
         ports:

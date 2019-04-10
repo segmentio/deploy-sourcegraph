@@ -56,7 +56,7 @@ spec:
         # archives of repositories at a commit.
         - name: CACHE_DIR
           value: /mnt/cache/$(POD_NAME)
-        image: sourcegraph/frontend:3.2.0@sha256:cbe10534ac6e1a719ae36ecccf4d83e7a21d0858586ae51e560f4a83d35d23ae
+        image: sourcegraph/frontend:3.2.2@sha256:3565eb6638f5e6df1b0205907ccb86b67365bbf554a88702e0da256ffad037a4
         terminationMessagePolicy: FallbackToLogsOnError
         livenessProbe:
           httpGet:

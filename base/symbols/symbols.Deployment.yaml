@@ -33,7 +33,7 @@ spec:
               fieldPath: metadata.name
         - name: CACHE_DIR
           value: /mnt/cache/$(POD_NAME)
-        image: sourcegraph/symbols:3.2.0@sha256:df790b0ef49b995bb7fe1b3ea43708759720a31a0acb9e3cf15cb2f2b9cb3722
+        image: sourcegraph/symbols:3.2.2@sha256:01da0b383b7e039f1c0571f1d3f83cb7058d7eacafe195b55a7143aa3d24fa36
         terminationMessagePolicy: FallbackToLogsOnError
         name: symbols
         livenessProbe:
