@@ -37,11 +37,11 @@ spec:
           name: rpc
         resources:
           limits:
-            cpu: "8"
-            memory: 16G
+            cpu: "4"
+            memory: 8G
           requests:
-            cpu: "8"
-            memory: 16G
+            cpu: "4"
+            memory: 8G
         volumeMounts:
         - mountPath: /data/repos
           name: repos
