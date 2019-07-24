@@ -2,20 +2,19 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   annotations:
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-west-2:355207333203:certificate/bb034c55-673a-480c-bfe2-736b3c9d24f1
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/tags: Environment=stage,Team=tooling
+    alb.ingress.kubernetes.io/tags: Environment=production,Team=tooling
     kubernetes.io/ingress.class: alb
   name: sourcegraph-frontend
-  namespace: tooling
+  namespace: sourcegraph
   labels:
     app: sourcegraph-frontend
     deploy: sourcegraph
   name: sourcegraph-frontend
 spec:
   rules:
-  - host: sourcegraph.segment.build
+  - host: sourcegraph.segment.com
     http:
       paths:
       - path: /*
