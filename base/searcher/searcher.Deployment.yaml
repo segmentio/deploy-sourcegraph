@@ -33,7 +33,7 @@ spec:
               fieldPath: metadata.name
         - name: CACHE_DIR
           value: /mnt/cache/$(POD_NAME)
-        image: index.docker.io/sourcegraph/searcher:3.6.2@sha256:acc4f90929341d41aa22821b18b04863510c26fd499b808396f44558156f0cf5
+        image: index.docker.io/sourcegraph/searcher:3.7.1@sha256:3e5226accc367e370c686556d1dbb748257294c75ae0a63bf93fb1c28f86d888
         terminationMessagePolicy: FallbackToLogsOnError
         name: searcher
         ports:
