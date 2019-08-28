@@ -20,6 +20,10 @@ spec:
     type: RollingUpdate
   template:
     metadata:
+      annotations:
+        # for promeneur
+        prometheus.io/port: "6060"
+        prometheus.io/scrape: "true"
       labels:
         app: replacer
     spec:

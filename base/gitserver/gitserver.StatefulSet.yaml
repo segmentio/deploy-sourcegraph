@@ -15,6 +15,10 @@ spec:
   serviceName: gitserver
   template:
     metadata:
+      annotations:
+        # for promeneur
+        prometheus.io/port: "6060"
+        prometheus.io/scrape: "true"
       labels:
         app: gitserver
         group: backend

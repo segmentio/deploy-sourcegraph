@@ -20,6 +20,10 @@ spec:
     type: RollingUpdate
   template:
     metadata:
+      annotations:
+        # for promeneur
+        prometheus.io/port: "9121"
+        prometheus.io/scrape: "true"
       labels:
         app: redis-cache
     spec:
