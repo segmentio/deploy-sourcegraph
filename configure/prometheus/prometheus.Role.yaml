@@ -1,19 +1,17 @@
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
+kind: Role
 metadata:
   labels:
     category: rbac
     deploy: prometheus
   name: prometheus
+  namespace: sourcegraph
 rules:
 - apiGroups:
   - ""
   resources:
   - endpoints
   - namespaces
-  - nodes
-  - nodes/metrics
-  - nodes/proxy
   - pods
   - services
   verbs:
@@ -24,9 +22,5 @@ rules:
   - ""
   resources:
   - configmaps
-  verbs:
-  - get
-- nonResourceURLs:
-  - /metrics
   verbs:
   - get
