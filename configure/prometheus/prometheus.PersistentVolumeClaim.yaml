@@ -4,6 +4,7 @@ metadata:
   labels:
     deploy: prometheus
   name: prometheus
+  namespace: sourcegraph
 spec:
   accessModes:
   - ReadWriteOnce

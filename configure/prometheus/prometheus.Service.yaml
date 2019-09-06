@@ -5,6 +5,7 @@ metadata:
     app: prometheus
     deploy: prometheus
   name: prometheus
+  namespace: sourcegraph
 spec:
   ports:
   - name: http

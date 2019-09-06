@@ -6,6 +6,7 @@ metadata:
   labels:
     deploy: prometheus
   name: prometheus
+  namespace: sourcegraph
 spec:
   minReadySeconds: 10
   replicas: 1
