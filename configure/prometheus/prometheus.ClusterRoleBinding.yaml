@@ -4,12 +4,11 @@ metadata:
   labels:
     category: rbac
     deploy: prometheus
-  name: prometheus
-  namespace: sourcegraph
+  name: sourcegraph-prometheus
 roleRef:
   apiGroup: ""
   kind: ClusterRole
-  name: prometheus
+  name: sourcegraph-prometheus
 subjects:
 - kind: ServiceAccount
   name: prometheus

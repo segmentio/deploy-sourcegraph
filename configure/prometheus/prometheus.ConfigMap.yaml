@@ -93,6 +93,22 @@ data:
   prometheus.yml: |
     ---
 
+    alerting:
+      alertmanagers: 
+      - kubernetes_sd_configs:
+        - role: service
+          namespaces:
+            names:
+              - sourcegraph
+
+          # this currently resolves to nothing
+        relabel_configs:
+        - action: labelmap
+          regex: __meta_kubernetes_service_label_(.+)
+        - source_labels: [app]
+          regex: alertmanager
+          action: keep
+
     global:
       scrape_interval:     30s
       evaluation_interval: 30s
@@ -104,14 +120,27 @@ data:
       - 'alert.rules'
       - 'extra.rules'
 
-    # A scrape configuration for running Prometheus on a Kubernetes cluster.
-    # This uses separate scrape configs for cluster components (i.e. API server, node)
-    # and services to allow each to use different authentication configs.
-    #
-    # Kubernetes labels will be added as Prometheus labels on metrics via the
-    # `labelmap` relabeling action.
-
     scrape_configs:
+
+    - job_name: 'kubernetes-nodes'
+
+      # docs say these should be the defaults when apiserver is empty, but didn't seem to actually be the case
+      scheme: https
+      tls_config:
+        ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+
+      kubernetes_sd_configs:
+      - role: node
+      relabel_configs:
+      - action: labelmap
+        regex: __meta_kubernetes_node_label_(.+)
+      - target_label: __address__
+        replacement: kubernetes.default.svc:443
+      - source_labels: [__meta_kubernetes_node_name]
+        regex: (.+)
+        target_label: __metrics_path__
+        replacement: /api/v1/nodes/${1}/proxy/metrics
 
     # Scrape config for service endpoints.
     #
