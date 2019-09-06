@@ -90,6 +90,15 @@ data:
       }
 
   extra.rules: ""
+  node.rules: |
+    node:container_cpu_usage_seconds_total:ratio_rate5m =
+      sum by (instance) (rate(container_cpu_usage_seconds_total{kubernetes_pod_name=""}[5m]))
+      /
+      max by (instance) (machine_cpu_cores)
+    task:container_memory_usage_bytes:max = max by (namespace, container_name)(container_memory_usage_bytes{container_name!=""})
+    task:container_cpu_usage_seconds_total:sum = sum by (id, namespace, container_name) (irate(container_cpu_usage_seconds_total{container_name!=""}[1m]))
+    node:k8snode_filesystem_avail_bytes:ratio =
+      min by (exported_name) (k8snode_filesystem_avail_bytes / k8snode_filesystem_size_bytes)
   prometheus.yml: |
     ---
 
@@ -114,6 +123,7 @@ data:
       evaluation_interval: 30s
 
     rule_files:
+      - 'node.rules'
       - 'sourcegraph.rules'
       - 'searcher.rules'
       - 'symbols.rules'
