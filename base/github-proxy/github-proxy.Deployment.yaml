@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
       - env:
-        image: index.docker.io/sourcegraph/github-proxy:3.12.7@sha256:feaaf4df007439500940b1930139e568ed4cde6d20b45132ccf6512adbad3039
+        image: index.docker.io/sourcegraph/github-proxy:3.13.1@sha256:5ae601bdb681dca2f9481021400c41fc5d0c05f89f2f083c04669ad4174a485f
         terminationMessagePolicy: FallbackToLogsOnError
         name: github-proxy
         ports:
