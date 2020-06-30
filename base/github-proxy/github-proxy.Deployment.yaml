@@ -5,6 +5,7 @@ metadata:
     description: Rate-limiting proxy for the GitHub API.
   labels:
     deploy: sourcegraph
+    sourcegraph-resource-requires: no-cluster-admin
   name: github-proxy
 spec:
   minReadySeconds: 10
@@ -22,10 +23,11 @@ spec:
     metadata:
       labels:
         app: github-proxy
+        deploy: sourcegraph
     spec:
       containers:
       - env:
-        image: index.docker.io/sourcegraph/github-proxy:3.15.2
+        image: index.docker.io/sourcegraph/github-proxy:3.16.2@sha256:6caf0230dbbe6b67392d83c5c37013b6e3cd54f75400b5275974cb9466a85e47
         terminationMessagePolicy: FallbackToLogsOnError
         name: github-proxy
         ports:
@@ -38,7 +40,7 @@ spec:
           requests:
             cpu: 100m
             memory: 250M
-      - image: sourcegraph/jaeger-agent:3.15.2
+      - image: index.docker.io/sourcegraph/jaeger-agent:3.16.2@sha256:3133b2036fe8fa6a02b7b40c9d957cbef0a44082736f6b63fade5b8ec2a9c4b6
         name: jaeger-agent
         env:
           - name: POD_NAME

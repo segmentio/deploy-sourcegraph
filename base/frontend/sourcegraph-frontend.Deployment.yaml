@@ -5,6 +5,7 @@ metadata:
     description: Serves the frontend of Sourcegraph via HTTP(S).
   labels:
     deploy: sourcegraph
+    sourcegraph-resource-requires: no-cluster-admin
   name: sourcegraph-frontend
 spec:
   minReadySeconds: 10
@@ -22,6 +23,7 @@ spec:
     metadata:
       labels:
         app: sourcegraph-frontend
+        deploy: sourcegraph
     spec:
       containers:
       - args:
@@ -56,7 +58,9 @@ spec:
           # new value after transition
         - name: PRECISE_CODE_INTEL_API_SERVER_URL
           value: k8s+http://precise-code-intel-api-server:3186
-        image: index.docker.io/sourcegraph/frontend:3.15.2
+        - name: PROMETHEUS_URL
+          value: http://prometheus:30090
+        image: index.docker.io/sourcegraph/frontend:3.16.2@sha256:7a07dcfdf91ce3a8ccd237d33adc4bfc80fa53a22cbf7f2e5b137f5daf0bdab2
         terminationMessagePolicy: FallbackToLogsOnError
         livenessProbe:
           httpGet:
@@ -88,7 +92,7 @@ spec:
         volumeMounts:
         - mountPath: /mnt/cache
           name: cache-ssd
-      - image: sourcegraph/jaeger-agent:3.15.2
+      - image: index.docker.io/sourcegraph/jaeger-agent:3.16.2@sha256:3133b2036fe8fa6a02b7b40c9d957cbef0a44082736f6b63fade5b8ec2a9c4b6
         name: jaeger-agent
         env:
           - name: POD_NAME
