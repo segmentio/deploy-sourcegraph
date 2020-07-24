@@ -6,6 +6,7 @@ metadata:
     alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/tags: Environment=production,Team=tooling
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-west-2:752180062774:certificate/a57e1dd4-bffd-4c78-ad34-db480408eec0,arn:aws:acm:us-west-2:752180062774:certificate/b7a45f0c-3009-42c2-97b9-ab81a61d1b25
     kubernetes.io/ingress.class: alb
     segment.com/owner: tooling
   name: sourcegraph-frontend
@@ -19,7 +20,7 @@ spec:
   rules:
   # only here for external-dns to pick up
   # order must be cluster-specific then global for patches
-  - host: sourcegraph.tooling.us-west-2.segment.com
+  - host: sourcegraph.tooling-1.eks.segment.com
     http:
       paths:
       # this uses causes an HTTP -> HTTPS redirect
