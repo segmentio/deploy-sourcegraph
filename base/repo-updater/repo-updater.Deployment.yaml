@@ -54,7 +54,7 @@ spec:
             memory: 500Mi
       - name: jaeger-agent
         image: index.docker.io/sourcegraph/jaeger-agent:3.25.2@sha256:48711e706cfdb85f99be639e7d8c09bca80d7c5d970a5f951b505ae21312f449
-t       env:
+        env:
           - name: POD_NAME
             valueFrom:
               fieldRef:
